@@ -20,7 +20,6 @@ public class ModelM implements Parcelable {
     @Expose
     private int category;
 
-
     @SerializedName("price")
     @Expose
     private Double modelPrice;

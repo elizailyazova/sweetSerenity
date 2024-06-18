@@ -33,10 +33,10 @@ import com.example.sweetsshop.ui.home.JemAdapter;
 public class BasketFragment extends Fragment {
 
     private FragmentBasketBinding binding;
-    private ArrayList<ModelM> basket_products;
-    JemAdapter adapter;
-    NavController navController;
-    Double total_sum = 1.0;
+    private ArrayList<Order> orderList;
+    private BasketAdapter adapter;
+    private NavController navController;
+    private Double totalSum = 0.0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,25 +47,28 @@ public class BasketFragment extends Fragment {
         View root = binding.getRoot();
 
         if (getArguments() != null) {
-            basket_products = new ArrayList<>();
-            basket_products = getArguments().getParcelableArrayList("keysss_basket");
-        }
-        if (basket_products != null) {
-            adapter = new JemAdapter(requireActivity(), basket_products);
-            binding.rvBacket.setAdapter(adapter);
+            orderList = getArguments().getParcelableArrayList("keysss_basket");
         }
 
-        try {
-            for (int i = 0; i <basket_products.size(); i++) {
-                total_sum += basket_products.get(i).getModelPrice();
-            }
-            binding.basketTotalCount.setText(String.valueOf(total_sum - 1.0));
-        } catch (NullPointerException ex) {
-            binding.basketTotalCount.setText("0.00");
-            Log.e("TAG", "error" + ex.getLocalizedMessage());
+        if (orderList != null) {
+            adapter = new BasketAdapter(requireActivity(), orderList, this::updateTotalPrice);
+            binding.rvBacket.setAdapter(adapter);
+            updateTotalPrice();
+        } else {
+            orderList = new ArrayList<>();
         }
 
         return root;
+    }
+
+    private void updateTotalPrice() {
+        totalSum = 0.0;
+        for (Order order : orderList) {
+            if (order.getDessert() != null) {
+                totalSum += order.getQuantity() * order.getDessert().getModelPrice();
+            }
+        }
+        binding.basketTotalCount.setText(String.valueOf(totalSum));
     }
 
     @Override
@@ -78,7 +81,7 @@ public class BasketFragment extends Fragment {
         });
 
         binding.btnPay.setOnClickListener(v1 -> {
-            total_sum = 0.0;
+            totalSum = 0.0;
             navController = Navigation.findNavController(requireActivity(), R.id.nav_host);
             navController.navigate(R.id.navigation_payment);
         });

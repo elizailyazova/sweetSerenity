@@ -16,22 +16,25 @@ import retrofit2.http.Path;
 public interface API {
 
     @GET("dessert/all")
-    Call<List<ModelM>> getStoreProducts();
+    Call<List<ModelM>> getStoreDesserts();
 
     @POST("dessert/create/")
-    Call<ModelM> createNewProduct();
+    Call<ModelM> createNewDessert();
 
     @GET("dessert/{id}/")
-    Call<ModelM> getProductById();
+    Call<ModelM> getDessert();
+
+    @GET("dessert/{id}/")
+    Call<ModelM> getDessertById(@Path("id") int id);
 
     @PUT("dessert/{id}/")
-    Call<ModelM> updateProductById();
+    Call<ModelM> updateDessertById();
 
     @DELETE("dessert/{id}/")
-    Call<ModelM> deleteProductById();
+    Call<ModelM> deleteDessertById();
 
     @PATCH("dessert/{id}/")
-    Call<ModelM> changeProductById();
+    Call<ModelM> changeDessertById();
 
     @POST("user/register")
     Call<User> registrationNewUser(@Body User user);

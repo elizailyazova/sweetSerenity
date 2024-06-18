@@ -26,6 +26,7 @@ import com.example.sweetsshop.models.ModelM;
 import com.example.sweetsshop.remote_data.RetrofitClient;
 import com.example.sweetsshop.ui.home.CategoryAdapter;
 import com.example.sweetsshop.ui.home.JemAdapter;
+import com.example.sweetsshop.ui.notifications.DescAdapter;
 
 import java.util.List;
 
@@ -86,6 +87,29 @@ public class CategoryFragment extends Fragment {
             navController = Navigation.findNavController(requireActivity(), R.id.nav_host);
             navController.navigate(R.id.action_categoryFragment_to_navigation_home);
         });
+        binding.basketBtn.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(requireActivity(), binding.basketBtn);
+            popup.getMenuInflater().inflate(R.menu.action_menu, popup.getMenu());
+            popup.setOnMenuItemClickListener(item -> {
+                switch (item.getTitle().toString()) {
+                    case "Добавить в корзину":
+                        navController = Navigation.findNavController(requireActivity(), R.id.nav_host);
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelableArrayList("keysss_basket", adapter.getSelected_BasketList());
+                        navController.navigate(R.id.navigation_basket, bundle);
+                        break;
+                    case "Пометить":
+                        Toast.makeText(requireActivity(), "Marked", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(requireActivity(), "default", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
+            });
+            popup.show();
+        });
+
     }
 
     @Override

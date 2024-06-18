@@ -1,7 +1,8 @@
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/favorites"
-        android:title="Add to backet"/>
-    <item android:id="@+id/mark"
-        android:title="Mark"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/add_to_basket"
+        android:title="Добавить в корзину" />
+    <item
+        android:id="@+id/mark_item"
+        android:title="Пометить" />
 </menu>

@@ -17,6 +17,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.sweetsshop.R;
 import com.example.sweetsshop.databinding.FragmentHomeBinding;
 import com.example.sweetsshop.models.Category;
@@ -55,6 +57,10 @@ public class HomeFragment extends Fragment {
             binding.textViewIdentify.setVisibility(View.VISIBLE);
             binding.textViewIdentify.setText(emailuserIdentify);
         }
+        loadCategories();
+        categoryAdapter = new CategoryAdapter();
+        categoryAdapter.setMain_list(list_category);
+        binding.rvCatalogCategory.setAdapter(categoryAdapter);
 
         setupRecyclerView();
         fetchDesserts();
@@ -76,7 +82,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchDesserts() {
-        Call<List<ModelM>> apiCall = RetrofitClient.getInstance().getApi().getStoreProducts();
+        Call<List<ModelM>> apiCall = RetrofitClient.getInstance().getApi().getStoreDesserts();
         apiCall.enqueue(new Callback<List<ModelM>>() {
             @Override
             public void onResponse(Call<List<ModelM>> call, Response<List<ModelM>> response) {
@@ -171,6 +177,11 @@ public class HomeFragment extends Fragment {
             navController = Navigation.findNavController(requireActivity(), R.id.nav_host);
             navController.navigate(R.id.action_navigation_home_to_navigation_registr);
         });
+        binding.feedbackBtn.setOnClickListener(v1 -> {
+            navController = Navigation.findNavController(requireActivity(), R.id.nav_host);
+            navController.navigate(R.id.action_navigation_home_to_feedbackFragment);
+        });
+
     }
 
     @Override

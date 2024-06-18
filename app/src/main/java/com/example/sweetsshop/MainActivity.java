@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_login)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
 
         Prefs prefs = new Prefs(this);
         if (!prefs.isShown()) {
@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 list.add(R.id.navigation_description);
                 list.add(R.id.categoryFragment);
                 list.add(R.id.splashActivity);
+                list.add(R.id.navigation_basket);
+                list.add(R.id.navigation_payment);
+                list.add(R.id.successFragment);
 
                 if (list.contains(navDestination.getId())) {
                     navView.setVisibility(View.GONE);

@@ -24,6 +24,8 @@ public class Order implements Parcelable {
     @Expose
     private int userId;
 
+    // Temporary fields to hold dessert data
+    private transient ModelM dessert;
 
     public Order(int dessertId, int quantity, int branchId, int userId) {
         this.dessertId = dessertId;
@@ -37,8 +39,8 @@ public class Order implements Parcelable {
         quantity = in.readInt();
         branchId = in.readInt();
         userId = in.readInt();
+        dessert = in.readParcelable(ModelM.class.getClassLoader());
     }
-
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -46,6 +48,7 @@ public class Order implements Parcelable {
         dest.writeInt(quantity);
         dest.writeInt(branchId);
         dest.writeInt(userId);
+        dest.writeParcelable(dessert, flags);
     }
 
     @Override
@@ -95,5 +98,13 @@ public class Order implements Parcelable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public ModelM getDessert() {
+        return dessert;
+    }
+
+    public void setDessert(ModelM dessert) {
+        this.dessert = dessert;
     }
 }

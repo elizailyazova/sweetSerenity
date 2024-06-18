@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.BasketFragment"
-    android:background="#F2FDE6"
     android:orientation="vertical"
     android:padding="12dp"
     >
@@ -14,7 +13,7 @@
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="36dp"
-        android:layout_height="30dp"
+        android:layout_height="36dp"
         android:layout_marginStart="6dp"
         android:background="@drawable/arrow_circle_left"
         android:contentDescription="button_back"
@@ -22,57 +21,89 @@
         />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your personal basket:"
-        android:background="@color/white"
-        android:layout_marginTop="30dp"
-        android:textSize="20sp"
         android:layout_gravity="center_horizontal"
-        />
+        android:fontFamily="sans-serif-medium"
+        android:text="My basket"
+        android:textAlignment="center"
+        android:textColor="#FF9314"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_backet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
         tools:listitem="@layout/item_product"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Count for pay"
-            android:textSize="20sp"
-            android:layout_marginStart="12dp"/>
-        <TextView
-            android:id="@+id/basket_total_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0.00"
-            android:textSize="20sp"
-            android:layout_marginStart="18dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$"
-            android:textSize="20sp"
-            android:layout_marginStart="12dp"/>
-    </LinearLayout>
+            android:background="@color/white"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/total_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textColor="#321D0B"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="12dp"/>
+            <TextView
+                android:id="@+id/basket_total_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textStyle="bold"
+                android:textColor="#321D0B"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/dollar"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="8dp"/>
+            <TextView
+                android:id="@+id/dollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:textStyle="bold"
+                android:textColor="#321D0B"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="12dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btn_pay"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
         app:cornerRadius="20dp"
-        android:backgroundTint="#C1D1A6"
-        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:text="pay"/>
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Go to checkout"
+        android:backgroundTint="#321D0B"
+        android:textAllCaps="false"/>
+    />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

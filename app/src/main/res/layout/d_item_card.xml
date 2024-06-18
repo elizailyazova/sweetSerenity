@@ -229,12 +229,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/addToBasket"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:text="ADD TO BASKET"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:backgroundTint="#321D0B"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

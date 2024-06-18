@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.payment.SuccessFragment"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:padding="18dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/checkmark"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"/>
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="10dp"
+        android:text="Your Order has been accepted"
+        android:textAlignment="center"
+        android:textColor="#181725"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="10dp"
+        android:text="You can pick up your order in 15 minutes at the shop"
+        android:textAlignment="center"
+        android:textColor="#181725"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        app:cornerRadius="20dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Back To Home"
+        android:backgroundTint="#321D0B"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

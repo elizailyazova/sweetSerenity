@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_home_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
     </fragment>
 
     <fragment
@@ -78,6 +81,9 @@
         <action
             android:id="@+id/action_navigation_payment_to_navigation_home"
             app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_payment_to_successFragment"
+            app:destination="@id/successFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -88,6 +94,7 @@
             android:id="@+id/action_categoryFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+
     <fragment
         android:id="@+id/boardFragment"
         android:name="com.example.sweetsshop.ui.board.BoardFragment"
@@ -96,6 +103,23 @@
             android:id="@+id/action_boardFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.example.sweetsshop.ui.feedback.FeedbackFragment"
+        android:label="FeedbackFragment" >
+        <action
+            android:id="@+id/action_feedbackFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.example.sweetsshop.ui.payment.SuccessFragment"
+        android:label="FeedbackFragment" >
+        <action
+            android:id="@+id/action_navigation_success_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
     <activity
         android:id="@+id/splashActivity"
         android:name="com.example.sweetsshop.SplashActivity"

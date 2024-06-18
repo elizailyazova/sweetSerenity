@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sweetsshop.R;
 import com.example.sweetsshop.databinding.ItemProductBinding;
 import com.example.sweetsshop.models.ModelM;
+import com.example.sweetsshop.models.Order;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class JemAdapter extends RecyclerView.Adapter<JemAdapter.ViewHolder> {
     Context context;
     List<ModelM> list;
     ArrayList<ModelM> desc_list = new ArrayList<>();
-    ArrayList<ModelM> selected_BasketList = new ArrayList<>();
+    ArrayList<Order> selected_BasketList = new ArrayList<>();
     NavController navController;
 
     public JemAdapter() {
@@ -39,7 +40,7 @@ public class JemAdapter extends RecyclerView.Adapter<JemAdapter.ViewHolder> {
         this.list = list;
     }
 
-    public ArrayList<ModelM> getSelected_BasketList() {
+    public ArrayList<Order> getSelected_BasketList() {
         return selected_BasketList;
     }
 
@@ -85,16 +86,17 @@ public class JemAdapter extends RecyclerView.Adapter<JemAdapter.ViewHolder> {
                 bundle.putParcelableArrayList("see more", desc_list);
                 navController = Navigation.findNavController((Activity) itemView.getContext(),
                         R.id.nav_host);
-                                navController.navigate(R.id.navigation_description, bundle);
+                navController.navigate(R.id.navigation_description, bundle);
                 Log.e("TAG", "pass data to description ! ! ! ");
             });
             itemView.setOnClickListener(v1 -> {
+                Order order = new Order(modelM.getModelId(), 1, 1, 1);
                 if (binding.tovarFavoriteCheck.getVisibility() == View.INVISIBLE) {
                     binding.tovarFavoriteCheck.setVisibility(View.VISIBLE);
-                    selected_BasketList.add(modelM);
+                    selected_BasketList.add(order);
                 } else {
                     binding.tovarFavoriteCheck.setVisibility(View.INVISIBLE);
-                    selected_BasketList.remove(modelM);
+                    selected_BasketList.remove(order);
                 }
             });
         }
