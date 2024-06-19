@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="22dp">
         <LinearLayout
-            android:layout_width="110dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="8dp"
@@ -23,7 +23,7 @@
                 android:layout_gravity="center">
                 <ImageView
                     android:id="@+id/image_category"
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_height="100dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/example_item"
@@ -32,7 +32,7 @@
             <TextView
                 android:id="@+id/title_category"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:text="Category"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-condensed-light"

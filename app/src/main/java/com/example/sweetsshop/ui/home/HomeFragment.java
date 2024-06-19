@@ -57,11 +57,10 @@ public class HomeFragment extends Fragment {
             binding.textViewIdentify.setVisibility(View.VISIBLE);
             binding.textViewIdentify.setText(emailuserIdentify);
         }
-        loadCategories();
         categoryAdapter = new CategoryAdapter();
         categoryAdapter.setMain_list(list_category);
         binding.rvCatalogCategory.setAdapter(categoryAdapter);
-
+        loadCategories();
         setupRecyclerView();
         fetchDesserts();
         setupCategoryViewModel();

@@ -23,9 +23,9 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             R.drawable.second_w,
             R.drawable.third_w};
     private String [] titles = new String[]  {
-            "Explore the World of Chocolate with Our App: Your One-Stop Shop for All Things Sweet! ",
-            "Browse a Wide Range of Delectable Treats and Savor the Richness of Chocolate, Anywhere, Anytime.",
-            "let’s start!" };
+            "Explore the World of Chocolate with Our App",
+            "Browse a Wide Range of Delectable Treats",
+            "Let’s start Our Journey, be our guest!" };
 
     @NonNull
     @Override

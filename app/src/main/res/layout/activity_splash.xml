@@ -11,16 +11,14 @@
     <ImageView
         android:id="@+id/imageViewSplash"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="720dp"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/splash"
+        android:src="@drawable/splash1"
         app:layout_constraintBottom_toTopOf="@id/textViewTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -29,12 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text="@string/splash"
         android:textColor="@color/brown"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

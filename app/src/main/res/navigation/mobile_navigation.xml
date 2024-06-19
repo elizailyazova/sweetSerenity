@@ -125,4 +125,9 @@
         android:name="com.example.sweetsshop.SplashActivity"
         android:label="activity_splash"
         tools:layout="@layout/activity_splash" />
+    <fragment
+        android:id="@+id/magazinyFragment"
+        android:name="com.example.sweetsshop.ui.magaziny.MagazinyFragment"
+        android:label="fragment_magaziny"
+        tools:layout="@layout/fragment_magaziny" />
 </navigation>
