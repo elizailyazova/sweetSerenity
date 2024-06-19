@@ -19,15 +19,18 @@ public class DescAdapter extends RecyclerView.Adapter<DescAdapter.ViewHolder> {
 
     DItemCardBinding binding;
     Context context;
-    List<ModelM> listD = new ArrayList<>();
+    List<ModelM> listD;
 
     public DescAdapter(Context context, List<ModelM> listD) {
         this.context = context;
         this.listD = listD;
     }
-    public void setListD(List<ModelM> listD) {
-        this.listD = listD;
+    public void setList(List<ModelM> list) {
+        this.listD = list != null ? list : new ArrayList<>();
+        notifyDataSetChanged();
     }
+
+
 
     @NonNull
     @Override
@@ -42,10 +45,12 @@ public class DescAdapter extends RecyclerView.Adapter<DescAdapter.ViewHolder> {
         holder.onBind(listD.get(position));
     }
 
+
     @Override
     public int getItemCount() {
-        return listD.size();
+        return listD != null ? listD.size() : 0;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(@NonNull DItemCardBinding itemView) {

@@ -47,8 +47,8 @@
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@id/hello"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
             <ImageView
                 android:id="@+id/signIn_reg"
                 android:layout_width="50dp"
@@ -68,17 +68,50 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Enter the dessert you want to find"
+                android:queryHint="Search desserts"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/basket_btn" />
+
             <ImageView
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginLeft="-24dp"
                 android:layout_marginRight="-24dp"
                 android:maxHeight="200dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/banner"
                 app:layout_constraintTop_toBottomOf="@id/hello"/>
+
+            <TextView
+                android:id="@+id/search_results_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search Results"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textColor="#321D0B"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_product"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/search_results_label"/>
 
             <TextView
                 android:id="@+id/recommendation"
@@ -90,7 +123,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-condensed-light"
                 android:textColor="#321D0B"
-                app:layout_constraintTop_toBottomOf="@id/banner"
+                app:layout_constraintTop_toBottomOf="@id/rv_search_results"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -132,7 +165,7 @@
                 android:layout_marginStart="168dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feedbackBtn" />
+                app:layout_constraintTop_toBottomOf="@id/rv_catalog_category" />
 
             <Button
                 android:id="@+id/feedbackBtn"
@@ -148,8 +181,7 @@
                 android:textSize="20dp"
                 app:cornerRadius="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_catalog_category" />
-
+                app:layout_constraintTop_toBottomOf="@id/progress_bar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </LinearLayout>

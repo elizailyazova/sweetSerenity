@@ -54,11 +54,6 @@ public class CategoryFragment extends Fragment {
             categoryId = getArguments().getInt("categoryId");
         }
 
-        loadDessertsByCategory(categoryId);
-        return root;
-    }
-
-    private void loadDessertsByCategory(int categoryId) {
         Call<List<ModelM>> apiCall = RetrofitClient.getInstance().getApi().getDessertByCategory(categoryId);
         apiCall.enqueue(new Callback<List<ModelM>>() {
             @Override
@@ -78,6 +73,7 @@ public class CategoryFragment extends Fragment {
                 Toast.makeText(requireActivity(), "No data", Toast.LENGTH_SHORT).show();
             }
         });
+        return root;
     }
 
     @Override

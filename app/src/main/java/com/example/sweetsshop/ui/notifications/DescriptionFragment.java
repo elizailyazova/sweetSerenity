@@ -31,20 +31,19 @@ public class DescriptionFragment extends Fragment {
     ArrayList<ModelM> d_list = new ArrayList<>();
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDescriptionBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        if(getArguments()!=null){
-            d_list = getArguments().getParcelableArrayList("see more");
+
+        if (getArguments() != null) {
+            d_list = getArguments().getParcelableArrayList("see_more");
             Log.e("TAG", "DATA GETTING!!!");
         } else {
-            Toast.makeText(requireActivity(), "There are nothing", Toast.LENGTH_SHORT);
+            Toast.makeText(requireActivity(), "No data passed", Toast.LENGTH_SHORT).show();
         }
 
-        adapter = new DescAdapter(requireActivity(), d_list);
+        adapter = new DescAdapter(requireContext(), d_list);
         binding.rvDetailsCatalog.setAdapter(adapter);
         return root;
     }
