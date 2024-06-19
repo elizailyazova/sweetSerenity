@@ -69,13 +69,13 @@ public class PaymentFragment extends Fragment {
             startActivity(myIntent);
         });
 
-        binding.cardMBank.setOnClickListener(v2->{
+        binding.cardMBank.setOnClickListener(v2 -> {
             Intent myIntent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://mbank.kg/"));
+                    Uri.parse("https://play.google.com/store/apps/details?id=com.maanavan.mb_kyrgyzstan&hl=ru&pli=1"));
             startActivity(myIntent);
         });
 
-        binding.cardODengi.setOnClickListener(v4->{
+        binding.cardODengi.setOnClickListener(v4 -> {
             Intent myIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/details?id=kg.o.nurtelecom&hl=ru"));
             startActivity(myIntent);
@@ -91,5 +91,10 @@ public class PaymentFragment extends Fragment {
                     R.id.nav_host);
             navController.navigate(R.id.action_navigation_payment_to_successFragment);
         });
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

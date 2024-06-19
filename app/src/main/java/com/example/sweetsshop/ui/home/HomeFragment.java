@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
@@ -13,18 +12,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.sweetsshop.R;
 import com.example.sweetsshop.databinding.FragmentHomeBinding;
 import com.example.sweetsshop.models.Category;
 import com.example.sweetsshop.models.ModelM;
 import com.example.sweetsshop.remote_data.RetrofitClient;
-import com.example.sweetsshop.ui.category.CategoryViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,7 +37,6 @@ public class HomeFragment extends Fragment {
     SharedPreferences preferences;
     List<Category> list_category = new ArrayList<>();
     String emailuserIdentify;
-    private CategoryViewModel categoryViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,30 +51,6 @@ public class HomeFragment extends Fragment {
             binding.textViewIdentify.setVisibility(View.VISIBLE);
             binding.textViewIdentify.setText(emailuserIdentify);
         }
-        categoryAdapter = new CategoryAdapter();
-        categoryAdapter.setMain_list(list_category);
-        binding.rvCatalogCategory.setAdapter(categoryAdapter);
-        loadCategories();
-        setupRecyclerView();
-        fetchDesserts();
-        setupCategoryViewModel();
-
-        return root;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("HomeFragment", "onResume() called");
-        loadCategories();
-    }
-
-    private void setupRecyclerView() {
-        categoryAdapter = new CategoryAdapter();
-        binding.rvCatalogCategory.setAdapter(categoryAdapter);
-    }
-
-    private void fetchDesserts() {
         Call<List<ModelM>> apiCall = RetrofitClient.getInstance().getApi().getStoreDesserts();
         apiCall.enqueue(new Callback<List<ModelM>>() {
             @Override
@@ -105,26 +75,8 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(requireActivity(), "NO DATA", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void setupCategoryViewModel() {
-        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        categoryViewModel.getCategoryListLiveData().observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
-            @Override
-            public void onChanged(List<Category> categories) {
-                if (!isAdded() || binding == null) return;
-                if (categories != null) {
-                    categoryAdapter.setMain_list(categories);
-                } else {
-                    Toast.makeText(requireContext(), "Failed to load categories", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void loadCategories() {
-        Call<List<Category>> apiCall = RetrofitClient.getInstance().getApi().getCategories();
-        apiCall.enqueue(new Callback<List<Category>>() {
+        Call<List<Category>> apiCalling = RetrofitClient.getInstance().getApi().getCategories();
+        apiCalling.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if (!isAdded() || binding == null) return;
@@ -132,6 +84,8 @@ public class HomeFragment extends Fragment {
                     if (binding.progressBar != null) {
                         binding.progressBar.setVisibility(View.INVISIBLE);
                     }
+                    categoryAdapter = new CategoryAdapter();
+                    binding.rvCatalogCategory.setAdapter(categoryAdapter);
                     categoryAdapter.setMain_list(response.body());
                 } else {
                     Toast.makeText(requireActivity(), "NO data from categories", Toast.LENGTH_SHORT).show();
@@ -145,7 +99,9 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(requireActivity(), "NO DATA", Toast.LENGTH_SHORT).show();
             }
         });
+        return root;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
