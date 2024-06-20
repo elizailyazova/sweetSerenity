@@ -3,6 +3,7 @@ package com.example.sweetsshop.ui.home;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     private List<ModelM> list;
     private ArrayList<Order> selected_BasketList = new ArrayList<>();
     private NavController navController;
+    ArrayList<ModelM> desc_list = new ArrayList<>();
 
     public SearchAdapter(Context context, List<ModelM> list) {
         this.context = context;
@@ -80,13 +82,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             binding.descriptionCard.setText(modelM.getModelDescription());
             Picasso.get().load(modelM.getModelImage()).into(binding.imageCard);
 
+
             binding.btnZoom.setOnClickListener(v -> {
-                ArrayList<ModelM> desc_list = new ArrayList<>();
                 desc_list.add(modelM);
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("see_more", desc_list);
                 navController = Navigation.findNavController((Activity) context, R.id.nav_host);
                 navController.navigate(R.id.navigation_description, bundle);
+                Log.e("TAG", "pass data to description ! ! ! ");
             });
 
         }

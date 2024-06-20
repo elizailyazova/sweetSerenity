@@ -28,7 +28,6 @@ public class JemAdapter extends RecyclerView.Adapter<JemAdapter.ViewHolder> {
     ItemProductBinding binding;
     Context context;
     List<ModelM> list;
-    ArrayList<ModelM> desc_list = new ArrayList<>();
     ArrayList<Order> selected_BasketList = new ArrayList<>();
     NavController navController;
 
@@ -82,14 +81,15 @@ public class JemAdapter extends RecyclerView.Adapter<JemAdapter.ViewHolder> {
             binding.descriptionCard.setText(modelM.getModelDescription());
             Picasso.get().load(modelM.getModelImage()).into(binding.imageCard);
             binding.btnZoom.setOnClickListener(v -> {
-                desc_list.add(modelM);
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("see more", desc_list);
-                navController = Navigation.findNavController((Activity) itemView.getContext(),
-                        R.id.nav_host);
+                ArrayList<ModelM> desc_list = new ArrayList<>();
+                desc_list.add(modelM);
+                bundle.putParcelableArrayList("see_more", desc_list);
+                navController = Navigation.findNavController((Activity) itemView.getContext(), R.id.nav_host);
                 navController.navigate(R.id.navigation_description, bundle);
                 Log.e("TAG", "pass data to description ! ! ! ");
             });
+
             itemView.setOnClickListener(v1 -> {
                 Order order = new Order(modelM.getModelId(), 1, 1, 1);
                 if (binding.tovarFavoriteCheck.getVisibility() == View.INVISIBLE) {

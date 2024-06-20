@@ -11,6 +11,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     JemAdapter adapter;
     CategoryAdapter categoryAdapter;
+    SearchAdapter searchAdapter;
     NavController navController;
     SharedPreferences preferences;
     List<Category> list_category = new ArrayList<>();
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment {
             binding.textViewIdentify.setVisibility(View.VISIBLE);
             binding.textViewIdentify.setText(emailuserIdentify);
         }
+
         Call<List<ModelM>> apiCall = RetrofitClient.getInstance().getApi().getStoreDesserts();
         apiCall.enqueue(new Callback<List<ModelM>>() {
             @Override
@@ -59,9 +62,9 @@ public class HomeFragment extends Fragment {
                 if (response.body() != null) {
                     if (binding.progressBar != null) {
                         binding.progressBar.setVisibility(View.INVISIBLE);
+                        adapter = new JemAdapter(requireActivity(), new ArrayList<>());
+                        binding.rvCatalogM.setAdapter(adapter);
                     }
-                    adapter = new JemAdapter();
-                    binding.rvCatalogM.setAdapter(adapter);
                     adapter.setList(response.body());
                 } else {
                     Toast.makeText(requireActivity(), "NO data from sweets shop", Toast.LENGTH_SHORT).show();
@@ -99,6 +102,50 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(requireActivity(), "NO DATA", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        searchAdapter = new SearchAdapter(requireActivity(), new ArrayList<>());
+        binding.rvSearchResults.setAdapter(searchAdapter);
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Call<List<ModelM>> searchCall = RetrofitClient.getInstance().getApi().searchDesserts(query);
+                searchCall.enqueue(new Callback<List<ModelM>>() {
+                    @Override
+                    public void onResponse(Call<List<ModelM>> call, Response<List<ModelM>> response) {
+                        if (!isAdded() || binding == null) return;
+                        if (response.isSuccessful()) {
+                            List<ModelM> searchResults = response.body();
+                            if (searchResults != null && !searchResults.isEmpty()) {
+                                binding.searchResultsLabel.setVisibility(View.VISIBLE);
+                                binding.rvSearchResults.setVisibility(View.VISIBLE);
+                                searchAdapter.setList(searchResults);
+                            } else {
+                                binding.searchResultsLabel.setVisibility(View.GONE);
+                                binding.rvSearchResults.setVisibility(View.GONE);
+                                Toast.makeText(requireActivity(), "No search results", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Log.e("TAG", "Search request failed with code: " + response.code());
+                            Toast.makeText(requireActivity(), "Search request failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ModelM>> call, Throwable t) {
+                        Log.e("SearchFragment", "Error searching desserts: " + t.getMessage());
+                        Toast.makeText(requireContext(), "Failed to search desserts", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return root;
     }
 
