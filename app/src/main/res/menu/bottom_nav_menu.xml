@@ -10,7 +10,7 @@
         android:icon="@drawable/baseline_dashboard_24"
         android:title="Login" />
     <item
-        android:id="@+id/navigation_magaziny"
+        android:id="@+id/magazinyFragment"
         android:icon="@drawable/baseline_fmd_good_24"
         android:title="Branches" />
 </menu>

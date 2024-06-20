@@ -3,6 +3,7 @@ package com.example.sweetsshop;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_login, R.id.navigation_magaziny)
+                R.id.navigation_home, R.id.navigation_login, R.id.magazinyFragment)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host);
         NavigationUI.setupWithNavController(binding.navView, navController);
@@ -67,5 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

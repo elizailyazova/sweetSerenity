@@ -70,5 +70,6 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
 
     implementation ("com.android.support.constraint:constraint-layout:1.1.3")
+    implementation ("com.google.android.gms:play-services-maps:18.0.1")
 
 }
